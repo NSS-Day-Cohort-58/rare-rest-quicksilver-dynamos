@@ -1,0 +1,29 @@
+[
+    {
+        "model": "rareserverapi.comment",
+        "pk": 1,
+        "fields": {
+            "author_id":2,
+            "post_id":1,
+            "content": "That's amazing..."
+        }
+    },
+{
+        "model": "rareserverapi.comment",
+        "pk": 2,
+        "fields": {
+            "author_id":4,
+            "post_id":1,
+            "content": "I disagree!"
+        }
+    },
+{
+        "model": "rareserverapi.comment",
+        "pk": 3,
+        "fields": {
+            "author_id":1,
+            "post_id":2,
+            "content": "This should be deleted."
+        }
+    }
+]

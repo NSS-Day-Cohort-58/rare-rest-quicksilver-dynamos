@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rareserverapi.tag",
+        "pk": 1,
+        "fields": {
+            "label":"Hilarious"
+        }
+    },
+{
+        "model": "rareserverapi.tag",
+        "pk": 2,
+        "fields": {
+            "label":"Stoopid"
+        }
+    },
+{
+        "model": "rareserverapi.tag",
+        "pk": 3,
+        "fields": {
+            "label":"Goofy"
+        }
+    }
+]

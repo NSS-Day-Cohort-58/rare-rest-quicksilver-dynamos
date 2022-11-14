@@ -1,0 +1,47 @@
+[
+    {
+        "model": "rareserverapi.post",
+        "pk": 1,
+        "fields": {
+            "user_id": 2,
+            "category_id": 3,
+            "title": "Check this out!",
+            "publication_date": "2022-11-08",
+            "image_url": "post_1_test_img",
+            "content": "This microchip is dope dawgssss.",
+            "approved": true,
+            "reactions": [],
+            "tags": []        
+        }
+    },
+{
+        "model": "rareserverapi.post",
+        "pk": 2,
+        "fields": {
+            "user_id": 4,
+            "category_id": 2,
+            "title": "This venue is closing!!!",
+            "publication_date": "2022-11-05",
+            "image_url": "post_2_test_img",
+            "content": "I'll miss the Exit/In",
+            "approved": true,
+            "reactions": [],
+            "tags": []        
+        }
+    },
+{
+        "model": "rareserverapi.post",
+        "pk": 3,
+        "fields": {
+            "user_id": 1,
+            "category_id": 1,
+            "title": "I hit this so faaarrrrr!",
+            "publication_date": "2022-11-01",
+            "image_url": "post_3_test_img",
+            "content": "Ball go boom!",
+            "approved": true,
+            "reactions": [],
+            "tags": []        
+        }
+    }
+]

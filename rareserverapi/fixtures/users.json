@@ -1,0 +1,66 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "first_name": "Peter",
+            "last_name": "Parker",
+            "email": "peter@parker.com",
+            "bio": "Is a swinger.",
+            "username": "peterparker",
+            "password": "parker",
+            "profile_image_url": "parker_test_img",
+            "created_on": "2022-11-10",
+            "active": true,
+            "admin": false
+        }
+    },
+{
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "first_name": "Terry",
+            "last_name":"Thomas",
+            "email": "terry@thomas.com",
+            "bio": "Gap toothed",
+            "username": "terrythomas",
+            "password": "thomas",
+            "profile_image_url": "terry_thomas_test_img",
+            "created_on": "2022-10-20",
+            "active": true,
+            "admin": true
+        }
+    },
+{
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "first_name": "Johnny",
+            "last_name": "Carson",
+            "email": "johnny@carson.com",
+            "bio": "Stays up late.",
+            "username": "johnnycarson",
+            "password": "carson",
+            "profile_image_url": "johnny_carson_test_img",
+            "created_on": "2022-11-17",
+            "active": false,
+            "admin": false
+        }
+    },
+{
+        "model": "auth.user",
+        "pk": 4,
+        "fields": {
+            "first_name": "Rhea",
+            "last_name": "Perlman",
+            "email": "rhea@perlman.com",
+            "bio": "Quite a shorty",
+            "username": "rheaperlman",
+            "password": "perlman",
+            "profile_image_url": "rhea_perlman_test_img",
+            "created_on": "2022-10-31",
+            "active": true,
+            "admin": true
+        }
+    }
+]

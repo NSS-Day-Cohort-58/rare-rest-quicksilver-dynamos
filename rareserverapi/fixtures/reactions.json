@@ -1,0 +1,23 @@
+[
+    {
+        "model": "rareserverapi.reaction",
+        "pk": 1,
+        "fields": {
+            "emoji":"0x1F600"
+        }
+    },
+{
+        "model": "rareserverapi.reaction",
+        "pk": 2,
+        "fields": {
+            "emoji":"0x1F604"
+        }
+    },
+{
+        "model": "rareserverapi.reaction",
+        "pk": 3,
+        "fields": {
+            "emoji":"0x1F34A"
+        }
+    }
+]
