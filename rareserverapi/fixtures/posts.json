@@ -3,7 +3,7 @@
         "model": "rareserverapi.post",
         "pk": 1,
         "fields": {
-            "user_id": 2,
+            "author": 2,
             "category_id": 3,
             "title": "Check this out!",
             "publication_date": "2022-11-08",
@@ -18,7 +18,7 @@
         "model": "rareserverapi.post",
         "pk": 2,
         "fields": {
-            "user_id": 4,
+            "author": 4,
             "category_id": 2,
             "title": "This venue is closing!!!",
             "publication_date": "2022-11-05",
@@ -33,7 +33,7 @@
         "model": "rareserverapi.post",
         "pk": 3,
         "fields": {
-            "user_id": 1,
+            "author": 1,
             "category_id": 1,
             "title": "I hit this so faaarrrrr!",
             "publication_date": "2022-11-01",

@@ -6,4 +6,4 @@ from .post import Post
 from .reaction import Reaction
 from .subscription import Subscription
 from .tag import Tag
-from .user import User
+from .member import Member

@@ -1,0 +1,38 @@
+[
+    {
+        "model": "rareserverapi.member",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "Is a swinger",
+            "profile_image_url": "parker_test_img"
+        }
+    },
+    {
+        "model": "rareserverapi.member",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "bio": "Gap toothed",
+            "profile_image_url": "terry_thomas_test_img"
+        }
+    },
+    {
+        "model": "rareserverapi.member",
+        "pk": 3,
+        "fields": {
+            "user": 3,
+            "bio": "Stays up late",
+            "profile_image_url": "johnny_carson_test_img"
+        }
+    },
+    {
+        "model": "rareserverapi.member",
+        "pk": 4,
+        "fields": {
+            "user": 4,
+            "bio": "Quite a shorty",
+            "profile_image_url": "rhea_perlman_test_img"
+        }
+    }
+]

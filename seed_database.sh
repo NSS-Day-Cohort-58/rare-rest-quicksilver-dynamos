@@ -5,6 +5,7 @@ python3 manage.py makemigrations rareserverapi
 python3 manage.py migrate rareserverapi
 python3 manage.py loaddata users
 python3 manage.py loaddata tokens
+python3 manage.py loaddata members
 python3 manage.py loaddata reactions
 python3 manage.py loaddata categories
 python3 manage.py loaddata tags
