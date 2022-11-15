@@ -5,7 +5,9 @@
         "fields": {
             "author_id":2,
             "post_id":1,
-            "content": "That's amazing..."
+            "content": "That's amazing...",
+            "subject": "Impressive",
+            "created": "2022-11-20"
         }
     },
 {
@@ -14,7 +16,9 @@
         "fields": {
             "author_id":4,
             "post_id":1,
-            "content": "I disagree!"
+            "content": "I disagree!",
+            "subject": "Just Bad",
+            "created": "2022-11-19"
         }
     },
 {
@@ -23,7 +27,9 @@
         "fields": {
             "author_id":1,
             "post_id":2,
-            "content": "This should be deleted."
+            "content": "This should be deleted.",
+            "subject": "Ignorant",
+            "created": "2022-11-25"
         }
     }
 ]
