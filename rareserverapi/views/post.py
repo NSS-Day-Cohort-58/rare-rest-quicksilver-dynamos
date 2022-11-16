@@ -21,9 +21,7 @@ class PostView(ViewSet):
     def create(self, request):
 
         category = Category.objects.get(pk=request.data["category"])
-        author = Member.objects.get(pk=request.data["member"])
-        reactions = Reaction.objects.get(pk=request.data["reactions"])
-        tags = Tag.objects.get(pk=request.data["tags"])
+        author = Member.objects.get(pk=request.data["author"])
 
         post = Post.objects.create(
             author=author,
@@ -32,9 +30,7 @@ class PostView(ViewSet):
             publication_date=request.data["publication_date"],
             image_url=request.data["image_url"],
             content=request.data["content"],
-            approved=request.data["approved"],
-            reactions=reactions,
-            tags=tags
+            approved=request.data["approved"]
         )
         serializer = PostSerializer(post)
         return Response(serializer.data)
