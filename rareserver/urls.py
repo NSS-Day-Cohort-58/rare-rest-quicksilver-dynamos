@@ -13,20 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from rest_framework import routers
-from rareserverapi.views import CategoryView, CommentView
+from rareserverapi.views import CategoryView, CommentView, PostView
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from rareserverapi.views import register_user, login_user
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'posts', PostView, 'post')
 router.register(r'categories', CategoryView, 'category')
 router.register(r'comments', CommentView, 'comment')
 
 urlpatterns = [
     path('register', register_user),
     path('login', login_user),
+
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
 ]
