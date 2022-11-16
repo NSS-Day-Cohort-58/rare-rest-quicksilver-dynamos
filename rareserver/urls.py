@@ -20,12 +20,13 @@ from rareserverapi.views import CategoryView, CommentView, PostView
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
-from rareserverapi.views import register_user, login_user
+from rareserverapi.views import register_user, login_user, TagView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostView, 'post')
 router.register(r'categories', CategoryView, 'category')
 router.register(r'comments', CommentView, 'comment')
+router.register(r'tags', TagView, 'comment')
 
 urlpatterns = [
     path('register', register_user),
