@@ -14,8 +14,14 @@ class PostView(ViewSet):
         return Response(serializer.data)
 
     def list(self, request):
-        post = Post.objects.all()
-        serializer = PostSerializer(post, many=True)
+
+        posts = Post.objects.all()
+        if "author" in request.query_params:
+            for post in posts:
+                if int(request.query_params['author']) == post.author_id:
+                    posts = posts.filter(author=post.author_id)
+
+        serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
     def create(self, request):
