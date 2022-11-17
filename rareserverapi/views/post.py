@@ -44,15 +44,27 @@ class PostView(ViewSet):
         category = Category.objects.get(pk=request.data["category"])
         author = Member.objects.get(user=request.auth.user)
 
-        post = Post.objects.create(
-            author=author,
-            category=category,
-            title=request.data["title"],
-            publication_date=request.data["publication_date"],
-            image_url=request.data["image_url"],
-            content=request.data["content"],
-            approved=True
-        )
+        if request.auth.user.is_staff:
+            post = Post.objects.create(
+                author=author,
+                category=category,
+                title=request.data["title"],
+                publication_date=request.data["publication_date"],
+                image_url=request.data["image_url"],
+                content=request.data["content"],
+                approved=True
+            )
+        else:
+            post = Post.objects.create(
+                author=author,
+                category=category,
+                title=request.data["title"],
+                publication_date=request.data["publication_date"],
+                image_url=request.data["image_url"],
+                content=request.data["content"],
+                approved=False
+            )
+
         serializer = PostSerializer(post)
         return Response(serializer.data)
 
