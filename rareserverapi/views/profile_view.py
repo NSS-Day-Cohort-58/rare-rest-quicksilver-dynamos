@@ -29,6 +29,7 @@ class ProfileView(ViewSet):
             user_id = profile.user_id
             assigned_user = User.objects.get(pk=user_id)
             assigned_user.is_active = request.data['user']['is_active']
+            assigned_user.is_staff = request.data['user']['is_staff']
             assigned_user.save()
             
             return Response(None, status=status.HTTP_204_NO_CONTENT)
