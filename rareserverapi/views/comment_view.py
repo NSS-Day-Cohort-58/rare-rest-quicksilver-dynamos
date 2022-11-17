@@ -3,20 +3,40 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from rareserverapi.models import Comment
+from rareserverapi.models import Comment, Post, Member
+import datetime
 
 class CommentView(ViewSet):
 
-    def list(self, requst):
+    def list(self, request):
 
         comments = Comment.objects.all()
+        filteredComments = []
+        if "postId" in request.query_params:
+            for comment in comments:
+                if int(request.query_params['postId']) == comment.post_id:
+                    filteredComments.append(comment)
+            serialized = CommentSerializer(filteredComments, many=True)
+            return Response(serialized.data, status=status.HTTP_200_OK)
+                    
         serialized = CommentSerializer(comments, many=True)
         return Response(serialized.data, status=status.HTTP_200_OK)
 
     def create(self, request):
 
-        serializer = CreateCommentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        post = Post.objects.get(pk=request.data["post_id"])
+        author = Member.objects.get(user=request.auth.user)
+
+        comment = Comment.objects.create(
+            author = author,
+            post = post,
+            content = request.data["content"],
+            subject = request.data["subject"],
+            created = datetime.date.today()
+        )
+
+
+        serializer = CreateCommentSerializer(comment)
         serializer.save()
         return Response(serializer.data)
 
