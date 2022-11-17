@@ -4,6 +4,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareserverapi.models import Post, Member, Category, Reaction, Tag, Subscription
+from rest_framework.decorators import action
+
 
 
 class PostView(ViewSet):
@@ -86,6 +88,25 @@ class PostView(ViewSet):
         post = Post.objects.get(pk=pk)
         post.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+
+    @action(methods=['post'], detail=True)
+    def addTag(self, request, pk):
+        """Post request to add a tag to a post"""
+    
+        tag = Tag.objects.get(pk=request.data["tag_id"])
+        post = Post.objects.get(pk=request.data["post_id"])
+        post.tags.add(tag)
+        return Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
+
+    @action(methods=['delete'], detail=True)
+    def removeTag(self, request, pk):
+        """delete request to remove a tag from a post"""
+    
+        tag = Tag.objects.get(pk=request.data["tag_id"])
+        post = Post.objects.get(pk=request.data["post_id"])
+        post.tags.remove(tag)
+        return Response({'message': 'Tag removed'}, status=status.HTTP_204_NO_CONTENT)
 
 
 class PostSerializer(serializers.ModelSerializer):
