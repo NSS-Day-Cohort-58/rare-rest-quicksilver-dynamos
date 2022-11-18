@@ -3,7 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from operator import itemgetter
-from rareserverapi.models import Member
+from rareserverapi.models import Member, Subscription
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -20,6 +20,9 @@ class ProfileView(ViewSet):
     def retrieve(self, request, pk):
 
         profile = Member.objects.get(pk=pk)
+        if profile.id == request.auth.user_id:
+            count_subscriptions = Subscription.objects.filter(author_id=request.auth.user_id).count()
+            profile.num_of_subscribers = count_subscriptions
         serialized = ProfileSerializer(profile, context={'request': request})
         return Response(serialized.data, status=status.HTTP_200_OK)
 
@@ -69,4 +72,5 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Member
-        fields = ('id', 'bio', 'profile_image_url', 'user', 'full_name', )
+        fields = ('id', 'bio', 'profile_image_url', 'user',
+             'full_name', 'num_of_subscribers' )

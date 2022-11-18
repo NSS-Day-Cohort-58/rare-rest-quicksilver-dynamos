@@ -11,3 +11,11 @@ class Member(models.Model):
     def full_name(self):
         return f'{self.user.first_name} {self.user.last_name}'
 
+    @property
+    def num_of_subscribers(self):
+        return self.__num_of_subscribers
+
+    @num_of_subscribers.setter
+    def num_of_subscribers(self, value):
+        self.__num_of_subscribers = value
+
