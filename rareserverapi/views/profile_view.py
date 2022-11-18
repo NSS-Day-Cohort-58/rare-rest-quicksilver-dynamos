@@ -5,6 +5,8 @@ from rest_framework import serializers, status
 from operator import itemgetter
 from rareserverapi.models import Member
 from django.contrib.auth.models import User
+from django.db.models import Q
+
 
 
 class ProfileView(ViewSet):
@@ -25,13 +27,30 @@ class ProfileView(ViewSet):
 
         if request.auth.user.is_staff:
 
+            admin_count = User.objects.filter(Q(is_staff=True) & Q(is_active=True)).count()
             profile = Member.objects.get(pk=pk)
             user_id = profile.user_id
             assigned_user = User.objects.get(pk=user_id)
-            assigned_user.is_active = request.data['user']['is_active']
-            assigned_user.is_staff = request.data['user']['is_staff']
-            assigned_user.save()
-            
+
+            if admin_count > 1:
+                assigned_user.is_active = request.data['user']['is_active']
+                assigned_user.is_staff = request.data['user']['is_staff']
+                assigned_user.save()
+
+            else:
+                if (assigned_user.is_staff == True and
+                    request.data['user']['is_staff'] == False):
+                    return Response({"message": "This user is the only active admin. Please add another admin before changing this profile." },
+                    status=status.HTTP_412_PRECONDITION_FAILED)
+                elif (assigned_user.is_staff == True and 
+                    request.data['user']['is_active'] == False):
+                    return Response({"message": "This user is the only active admin. Please add another admin before changing this profile." },
+                    status=status.HTTP_412_PRECONDITION_FAILED)
+                else:
+                    assigned_user.is_active = request.data['user']['is_active']
+                    assigned_user.is_staff = request.data['user']['is_staff']
+                    assigned_user.save()
+
             return Response(None, status=status.HTTP_204_NO_CONTENT)
 
         else:
