@@ -38,6 +38,15 @@ class PostView(ViewSet):
             else:
                 posts = {}
 
+        if "mine" in request.query_params:
+            user= Member.objects.get(user=request.auth.user)
+            posts = Post.objects.filter(author=user)
+
+
+        # for post in posts:
+        #     author = Member.objects.get(pk=post.author)
+        #     post.author=author
+
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 
@@ -72,8 +81,11 @@ class PostView(ViewSet):
 
     def update(self, request, pk):
 
+        author = Member.objects.get(pk=request.auth.user)
+
+        
         post = Post.objects.get(pk=pk)
-        post.author = Member.objects.get(pk=request.data["author"])
+        post.author = author
         post.title = request.data["title"]
         post.publication_date = request.data["publication_date"]
         post.image_url = request.data["image_url"]
@@ -109,9 +121,23 @@ class PostView(ViewSet):
         return Response({'message': 'Tag removed'}, status=status.HTTP_204_NO_CONTENT)
 
 
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ('id', 'profile_image_url', 'user', 'full_name',)
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'label',)
+
 class PostSerializer(serializers.ModelSerializer):
+
+    author = MemberSerializer(many=False)
+    category = CategorySerializer(many=False)
 
     class Meta:
         model = Post
         fields = ('id', 'author', 'category', 'title', 'publication_date',
                   'image_url', 'content', 'approved', 'reactions', 'tags')
+        depth = 1
