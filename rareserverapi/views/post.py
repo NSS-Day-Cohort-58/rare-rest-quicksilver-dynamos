@@ -118,20 +118,24 @@ class PostView(ViewSet):
         """Post request to add a tag to a post"""
 
         post = Post.objects.get(pk=request.data["post_id"])
-        post.tags.delete(all)
 
         postTags = request.data["tags"]
+
+        for postTag in postTags:
+            if postTag['isChecked'] == True:
+                tag = Tag.objects.get(pk=postTag['id'])
+                post.tags.add(tag)
 
         post.tags.add(tag)
         return Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
 
     @action(methods=['delete'], detail=True)
-    def removeTag(self, request, pk):
+    def removeTags(self, request, pk):
         """delete request to remove a tag from a post"""
 
-        tag = Tag.objects.get(pk=request.data["tag_id"])
-        post = Post.objects.get(pk=request.data["post_id"])
-        post.tags.remove(tag)
+        post = Post.objects.get(pk=pk)
+        post.tags.clear()
+
         return Response({'message': 'Tag removed'}, status=status.HTTP_204_NO_CONTENT)
 
     @action(methods=['post'], detail=True)
