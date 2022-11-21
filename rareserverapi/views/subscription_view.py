@@ -12,12 +12,18 @@ class SubscriptionView(ViewSet):
     """Level up game types view"""
 
     def retrieve(self, request, pk):
+
         subscription = Subscription.objects.get(pk=pk)
         serializer = SubscriptionSerializer(subscription)
         return Response(serializer.data)
 
     def list(self, request):
         subscription = Subscription.objects.all()
+
+        if "mine" in request.query_params:
+            user = Member.objects.get(user=request.auth.user)
+            subscription = Subscription.objects.filter(follower=user)
+
         serializer = SubscriptionSerializer(subscription, many=True)
         return Response(serializer.data)
 
