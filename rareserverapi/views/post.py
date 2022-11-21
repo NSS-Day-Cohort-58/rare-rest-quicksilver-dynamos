@@ -49,6 +49,13 @@ class PostView(ViewSet):
             user = Member.objects.get(user=request.auth.user)
             posts = Post.objects.filter(author=user)
 
+
+        if "search" in request.query_params:
+            posts = Post.objects.filter(title__contains=request.query_params['search'])
+        else:
+            pass
+        
+
         # for post in posts:
         #     author = Member.objects.get(pk=post.author)
         #     post.author=author
