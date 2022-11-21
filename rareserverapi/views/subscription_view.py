@@ -5,6 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rareserverapi.models import Subscription, Member
+import datetime
 
 
 class SubscriptionView(ViewSet):
@@ -32,7 +33,7 @@ class SubscriptionView(ViewSet):
         subscription = Subscription.objects.create(
             follower=follower,
             author=author,
-            created=request.data["created"]
+            created=datetime.datetime.now()
         )
         serializer = SubscriptionSerializer(subscription)
         return Response(serializer.data)

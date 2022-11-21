@@ -7,3 +7,4 @@ from .auth import register_user, login_user
 from .tag_view import TagView
 from .reaction_views import ReactionView
 from .subscription_view import SubscriptionView
+from .members_view import MemberView
