@@ -31,12 +31,19 @@ class PostView(ViewSet):
                 if subscription.follower_id == id.id:
                     sub.append(subscription)
             if sub:
+                filteredPosts = []
                 for s in sub:
+                    for p in posts:
+                        if p.author == s.author:
+                            filteredPosts.append(p)
 
-                    posts = posts.filter(author=s.author_id)
+                posts = filteredPosts
 
-            # else:
-            #     posts = {}
+
+            else:
+                posts = {}
+
+
 
         if "mine" in request.query_params:
             user = Member.objects.get(user=request.auth.user)
@@ -80,7 +87,7 @@ class PostView(ViewSet):
 
     def update(self, request, pk):
 
-        author = Member.objects.get(pk=request.auth.user)
+        author = Member.objects.get(pk=request.auth.user_id)
 
         post = Post.objects.get(pk=pk)
         post.author = author
@@ -100,11 +107,14 @@ class PostView(ViewSet):
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
     @action(methods=['post'], detail=True)
-    def addTag(self, request, pk):
+    def addTags(self, request, pk):
         """Post request to add a tag to a post"""
 
-        tag = Tag.objects.get(pk=request.data["tag_id"])
         post = Post.objects.get(pk=request.data["post_id"])
+        post.tags.delete(all)
+
+        postTags = request.data["tags"]
+
         post.tags.add(tag)
         return Response({'message': 'Tag added'}, status=status.HTTP_201_CREATED)
 
