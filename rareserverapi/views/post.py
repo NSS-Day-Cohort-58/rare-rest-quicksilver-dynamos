@@ -39,19 +39,23 @@ class PostView(ViewSet):
 
                 posts = filteredPosts
 
+
             else:
                 posts = {}
 
 
+
         if "mine" in request.query_params:
-            user= Member.objects.get(user=request.auth.user)
+            user = Member.objects.get(user=request.auth.user)
             posts = Post.objects.filter(author=user)
+
 
         if "search" in request.query_params:
             posts = Post.objects.filter(title__contains=request.query_params['search'])
         else:
             pass
         
+
         # for post in posts:
         #     author = Member.objects.get(pk=post.author)
         #     post.author=author
@@ -92,7 +96,6 @@ class PostView(ViewSet):
 
         author = Member.objects.get(pk=request.auth.user_id)
 
-        
         post = Post.objects.get(pk=pk)
         post.author = author
         post.title = request.data["title"]
@@ -160,10 +163,12 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
         fields = ('id', 'profile_image_url', 'user', 'full_name',)
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'label',)
+
 
 class PostSerializer(serializers.ModelSerializer):
 
